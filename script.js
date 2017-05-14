@@ -18,27 +18,26 @@ End of Comment Section */
 //We can use this in order to draw things.
 
 var ctx = document.getElementById("ctx").getContext("2d")
-
-
-//Player.
-var x = 50;
-var spdX = 30;
-var y = 40;
-var spdY = 5;
-var name = 'P'
-
 var HEIGHT = 500;
 var WIDTH = 500;
 
-//Enemy.
-var enemy_x = 150;
-var enemy_spdX = 10;
-var enemy_y = 350;
-var enemy_spdY = 15;
-var enemy_name = 'E'
+//Object containing properties for player.
+var player = {
+x:50,
+spdX:30,
+y:40,
+spdY:5,
+name:'P',
+};
 
-var HEIGHT = 500;
-var WIDTH = 500;
+//Object containing properties for enemy.
+var enemy = {
+x:150,
+spdX:10,
+y:350,
+spdY:15,
+name:'E',
+};
 
 var message = 'Bouncing';
 
@@ -49,41 +48,29 @@ ctx.font = '30px Arial';
 //called update every x seconds we create in the 2nd parameter.
 setInterval(update, 40);
 
-function update(){
-//Player.
-ctx.fillText(name,x,y);
-x += spdX;
-y += spdY;
-console.log("Testing for the placements of Y and X values.")
-	
-	if(x < 0 || x > WIDTH){
-	console.log(message);
-	spdX = -spdX;
-	}
-
-	if(y < 0 || y > HEIGHT){
-	console.log(message);
-	spdY = -spdY;
-	}
-
+function updateEntity(test){
 //Enemy.
-ctx.fillText(enemy_name,enemy_x,enemy_y);
-enemy_x += enemy_spdX;
-enemy_y += enemy_spdY;
+ctx.fillText(test.name,test.x,test.y);
+test.x += test.spdX;
+test.y += test.spdY;
 console.log("Testing for the placements of Y and X values.")
 	
-	if(enemy_x < 0 || enemy_x > WIDTH){
+	if(test.x < 0 || test.x > WIDTH){
 	console.log(message);
-	enemy_spdX = -enemy_spdX;
+	test.spdX = -test.spdX;
 	}
 
-	if(enemy_y < 0 || enemy_y > HEIGHT){
+	if(test.y < 0 || test.y > HEIGHT){
 	console.log(message);
-	enemy_spdY = -enemy_spdY;
+	test.spdY = -test.spdY;
 	}
 
 }
 
+function update(){
+	updateEntity(player);
+	updateEntity(enemy);
+}
 
 
 
