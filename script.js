@@ -18,6 +18,8 @@ End of Comment Section */
 //We can use this in order to draw things.
 
 var ctx = document.getElementById("ctx").getContext("2d")
+
+//variables holding the values of the canvas properties.
 var HEIGHT = 500;
 var WIDTH = 500;
 
@@ -30,26 +32,53 @@ spdY:5,
 name:'P',
 };
 
-//Object containing properties for enemy.
+//Array list for all the enemies.
+var enemylist = {};
+
+//Object containing properties for enemy's.
 var enemy = {
 x:150,
 spdX:10,
 y:350,
 spdY:15,
-name:'E',
+name:'E1',
+id:'E1',
 };
+enemylist['E1'] = enemy;
 
+var enemy2 = {
+x:250,
+spdX:10,
+y:350,
+spdY:-15,
+name:'E2',
+id:'E2'
+};
+enemylist['E2'] = enemy2;
+
+var enemy3 = {
+x:50,
+spdX:15,
+y:350,
+spdY:-15,
+name:'E3',
+id:'E3'
+};
+enemylist['E3'] = enemy3;
+
+//Variable witholding messages to be used.
 var message = 'Bouncing';
 
 //For now, the below is expressing how we can draw something
 //within our canvas and effect how it will be placed.
 ctx.font = '30px Arial';
 //setInterval is a timer. It will process the function we created
-//called update every x seconds we create in the 2nd parameter.
+//called update every 40 miliseconds we create in the 2nd parameter.
 setInterval(update, 40);
 
+//Function template for any object we decide to call on.
 function updateEntity(test){
-//Enemy.
+
 ctx.fillText(test.name,test.x,test.y);
 test.x += test.spdX;
 test.y += test.spdY;
@@ -66,10 +95,18 @@ console.log("Testing for the placements of Y and X values.")
 	}
 
 }
-
+//clearRect is clearing the past fillText we created at every 
+//x and y for every object moving leaving no trail or duplicates.
 function update(){
+	ctx.clearRect(0,0,WIDTH,HEIGHT);
+// The for loop will run through the enemyList for every key
+// that exist. We created the keys by giving every enemy cariable 
+// inside the list with an 'id' and assigning the variable
+// at the end to the enemyList array we created.
+	for(var key in enemylist){
+		updateEntity(enemylist[key])
+	}
 	updateEntity(player);
-	updateEntity(enemy);
 }
 
 
