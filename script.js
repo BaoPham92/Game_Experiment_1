@@ -29,42 +29,31 @@ x:50,
 spdX:30,
 y:40,
 spdY:5,
-name:'P',
+name:'Player',
 };
+
+//Collisions for the objects.
 
 //Array list for all the enemies.
 var enemylist = {};
 
-//Object containing properties for enemy's.
-var enemy = {
-x:150,
-spdX:10,
-y:350,
-spdY:15,
-name:'E1',
-id:'E1',
-};
-enemylist['E1'] = enemy;
+//Object containing properties for enemy's encased in 
+//A array.
+Enemy('E1',150,350,10,15);
+Enemy('E2',250,350,10,-15);
+Enemy('E3',250,150,10,-8);
 
-var enemy2 = {
-x:250,
-spdX:10,
-y:350,
-spdY:-15,
-name:'E2',
-id:'E2'
-};
-enemylist['E2'] = enemy2;
-
-var enemy3 = {
-x:50,
-spdX:15,
-y:350,
-spdY:-15,
-name:'E3',
-id:'E3'
-};
-enemylist['E3'] = enemy3;
+function Enemy(id,x,y,spdX,spdY){
+	var enemy3 = {
+		x:x,
+		spdX:spdX,
+		y:y,
+		spdY:spdY,
+		name:'E',
+		id:id,
+	};
+	enemylist[id] = enemy3;
+}
 
 //Variable witholding messages to be used.
 var message = 'Bouncing';
@@ -74,7 +63,7 @@ var message = 'Bouncing';
 ctx.font = '30px Arial';
 //setInterval is a timer. It will process the function we created
 //called update every 40 miliseconds we create in the 2nd parameter.
-setInterval(update, 40);
+setInterval(update, 30.5);
 
 //Function template for any object we decide to call on.
 function updateEntity(test){
@@ -108,6 +97,7 @@ function update(){
 	}
 	updateEntity(player);
 }
+
 
 
 
