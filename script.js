@@ -23,6 +23,9 @@ var ctx = document.getElementById("ctx").getContext("2d")
 var HEIGHT = 500;
 var WIDTH = 500;
 
+//Variable witholding messages to be used.
+var message = 'Bouncing';
+
 //Object containing properties for player.
 var player = {
 x:50,
@@ -39,9 +42,35 @@ var enemylist = {};
 
 //Object containing properties for enemy's encased in 
 //A array.
+
 Enemy('E1',150,350,10,15);
 Enemy('E2',250,350,10,-15);
 Enemy('E3',250,150,10,-8);
+Enemy('E4',100,110,10,15);
+Enemy('E5',120,115,10,-15);
+Enemy('E6',245,150,10,-8);
+Enemy('E7',235,350,10,15);
+Enemy('E8',255,350,10,-15);
+Enemy('E9',290,355,10,-8);
+
+//Collision system below.
+
+// player : point (x,y)
+// enery : point (x,y)
+
+// get distance between player and enemy < 30 => colliding
+
+function getDistanceBetweenEntity(entity1,entity2){ //Return Distance (number)
+	var vx = entity1.x - entity2.x;
+	var vy = entity1.y - entity2.y;
+	return Math.sqrt(vx*vx+vy*vy);
+}
+
+function testCollidingEntity(entity1,entity2){ //Return if colliding (True/False)
+	var distance = getDistanceBetweenEntity(entity1,entity2);
+	return distance < 30;
+}
+
 
 function Enemy(id,x,y,spdX,spdY){
 	var enemy3 = {
@@ -55,15 +84,13 @@ function Enemy(id,x,y,spdX,spdY){
 	enemylist[id] = enemy3;
 }
 
-//Variable witholding messages to be used.
-var message = 'Bouncing';
 
 //For now, the below is expressing how we can draw something
 //within our canvas and effect how it will be placed.
 ctx.font = '30px Arial';
 //setInterval is a timer. It will process the function we created
 //called update every 40 miliseconds we create in the 2nd parameter.
-setInterval(update, 30.5);
+setInterval(update, 35);
 
 //Function template for any object we decide to call on.
 function updateEntity(test){
@@ -94,6 +121,11 @@ function update(){
 // at the end to the enemyList array we created.
 	for(var key in enemylist){
 		updateEntity(enemylist[key])
+
+		var isColliding = testCollidingEntity(player,enemylist[key]);
+		if(isColliding){
+			console.log("Colliding!");
+		}
 	}
 	updateEntity(player);
 }
