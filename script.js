@@ -44,14 +44,21 @@ var enemylist = {};
 //A array.
 
 Enemy('E1',150,350,10,15);
-Enemy('E2',250,350,10,-15);
-Enemy('E3',250,150,10,-8);
+Enemy('E2',250,315,10,-15);
+Enemy('E3',250,150,8,-8);
 Enemy('E4',100,110,10,15);
 Enemy('E5',120,115,10,-15);
-Enemy('E6',245,150,10,-8);
+Enemy('E6',245,150,7,-8);
 Enemy('E7',235,350,10,15);
 Enemy('E8',255,350,10,-15);
 Enemy('E9',290,355,10,-8);
+Enemy('E10',300,100,5,-5);
+Enemy('E11',225,115,6,-9);
+Enemy('E12',100,465,2,-3);
+Enemy('E13',135,395,4,-11);
+Enemy('E14',90,286,3,-12);
+Enemy('E15',20,150,20,-19);
+
 
 //Collision system below.
 
@@ -98,7 +105,6 @@ function updateEntity(test){
 ctx.fillText(test.name,test.x,test.y);
 test.x += test.spdX;
 test.y += test.spdY;
-console.log("Testing for the placements of Y and X values.")
 	
 	if(test.x < 0 || test.x > WIDTH){
 	console.log(message);
@@ -129,6 +135,10 @@ function update(){
 	}
 	updateEntity(player);
 }
+//This is where the health bar is going to be.
+
+//Mechanics will include the Enemie's and the player's health bar.
+//Here we will also be placing grounds for the sprite completion.
 
 
 
