@@ -40,24 +40,6 @@ name:'Player',
 //Array list for all the enemies.
 var enemylist = {};
 
-//Object containing properties for enemy's encased in 
-//A array.
-
-Enemy('E1',150,350,10,15);
-Enemy('E2',250,315,10,-15);
-Enemy('E3',250,150,8,-8);
-Enemy('E4',100,110,10,15);
-Enemy('E5',120,115,10,-15);
-Enemy('E6',245,150,7,-8);
-Enemy('E7',235,350,10,15);
-Enemy('E8',255,350,10,-15);
-Enemy('E9',290,355,10,-8);
-Enemy('E10',300,100,5,-5);
-Enemy('E11',225,115,6,-9);
-Enemy('E12',100,465,2,-3);
-Enemy('E13',135,395,4,-11);
-Enemy('E14',90,286,3,-12);
-Enemy('E15',20,150,20,-19);
 
 
 //Collision system below.
@@ -67,19 +49,19 @@ Enemy('E15',20,150,20,-19);
 
 // get distance between player and enemy < 30 => colliding
 
-function getDistanceBetweenEntity(entity1,entity2){ //Return Distance (number)
+getDistanceBetweenEntity = function (entity1,entity2){ //Return Distance (number)
 	var vx = entity1.x - entity2.x;
 	var vy = entity1.y - entity2.y;
 	return Math.sqrt(vx*vx+vy*vy);
 }
 
-function testCollidingEntity(entity1,entity2){ //Return if colliding (True/False)
+testCollidingEntity = function (entity1,entity2){ //Return if colliding (True/False)
 	var distance = getDistanceBetweenEntity(entity1,entity2);
 	return distance < 30;
 }
 
 
-function Enemy(id,x,y,spdX,spdY){
+Enemy = function (id,x,y,spdX,spdY){
 	var enemy3 = {
 		x:x,
 		spdX:spdX,
@@ -95,12 +77,9 @@ function Enemy(id,x,y,spdX,spdY){
 //For now, the below is expressing how we can draw something
 //within our canvas and effect how it will be placed.
 ctx.font = '30px Arial';
-//setInterval is a timer. It will process the function we created
-//called update every 40 miliseconds we create in the 2nd parameter.
-setInterval(update, 35);
 
 //Function template for any object we decide to call on.
-function updateEntity(test){
+updateEntity = function (test){
 
 ctx.fillText(test.name,test.x,test.y);
 test.x += test.spdX;
@@ -119,7 +98,7 @@ test.y += test.spdY;
 }
 //clearRect is clearing the past fillText we created at every 
 //x and y for every object moving leaving no trail or duplicates.
-function update(){
+update = function (){
 	ctx.clearRect(0,0,WIDTH,HEIGHT);
 // The for loop will run through the enemyList for every key
 // that exist. We created the keys by giving every enemy cariable 
@@ -135,10 +114,29 @@ function update(){
 	}
 	updateEntity(player);
 }
-//This is where the health bar is going to be.
 
-//Mechanics will include the Enemie's and the player's health bar.
-//Here we will also be placing grounds for the sprite completion.
+//setInterval is a timer. It will process the function we created
+//called update every 40 miliseconds we create in the 2nd parameter.
+setInterval(update, 35);
+
+//Object containing properties for enemy's encased in 
+//A array.
+
+Enemy('E1',150,350,10,15);
+Enemy('E2',250,315,10,-15);
+Enemy('E3',250,150,8,-8);
+Enemy('E4',100,110,10,15);
+Enemy('E5',120,115,10,-15);
+Enemy('E6',245,150,7,-8);
+Enemy('E7',235,350,10,15);
+Enemy('E8',255,350,10,-15);
+Enemy('E9',290,355,10,-8);
+Enemy('E10',300,100,5,-5);
+Enemy('E11',225,115,6,-9);
+Enemy('E12',100,465,2,-3);
+Enemy('E13',135,395,4,-11);
+Enemy('E14',90,286,3,-12);
+Enemy('E15',20,150,20,-19);
 
 
 
