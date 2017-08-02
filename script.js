@@ -45,14 +45,14 @@ var enemylist = {};
 //Collision system below.
 
 // player : point (x,y)
-// enery : point (x,y)
+// enemy : point (x,y)
 
 // get distance between player and enemy < 30 => colliding
 
 getDistanceBetweenEntity = function (entity1,entity2){ //Return Distance (number)
 	var vx = entity1.x - entity2.x;
 	var vy = entity1.y - entity2.y;
-	return Math.sqrt(vx*vx+vy*vy);
+	return Math.sqrt(vx*vx+vy*vy); 
 }
 
 testCollidingEntity = function (entity1,entity2){ //Return if colliding (True/False)
@@ -60,7 +60,7 @@ testCollidingEntity = function (entity1,entity2){ //Return if colliding (True/Fa
 	return distance < 30;
 }
 
-
+// Movement controller for the enemy objects.
 Enemy = function (id,x,y,spdX,spdY){
 	var enemy3 = {
 		x:x,
