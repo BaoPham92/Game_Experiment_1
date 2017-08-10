@@ -35,7 +35,6 @@ spdY:5,
 name:'Player',
 };
 
-//Collisions for the objects.
 
 //Array list for all the enemies.
 var enemylist = {};
