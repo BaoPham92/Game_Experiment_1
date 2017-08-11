@@ -16,3 +16,15 @@
 // Going to attempt to give a go at making health bars for 
 // both oppositions now and also clean and streamline more 
 // code for better clarifications.
+
+-Aug 10th & Notes - 
+Graduated General Assembly and seeing how I used the readme is pretty horrid haha. Good thing I seen a good chunk well written ReadMe's from coding this whole time. 
+Anyways, time to chaulk up some new features to tackle.
+----------------------------------------------------------
+
+Features to add:
+
+1. Health Bar calculation system.
+2. Sprite animation in placement of objects.
+3. Canvas grid design for floor/platform system for objects to interact with.
+4. Reaction animations for unique objects
