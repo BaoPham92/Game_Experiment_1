@@ -134,7 +134,7 @@ update = function (){
 			
 			if(player.hp <= 0){
 				var timeDied = Date.now() - timeStarted;
-				console.log("Player died! You died at " + timeDied + " and started from " + timeStarted);
+				console.log("Player died! You died at " + timeDied + " ms.");
 
 				timeStarted = Date.now();
 				player.hp = 100;
