@@ -28,3 +28,14 @@ Features to add:
 2. Sprite animation in placement of objects.
 3. Canvas grid design for floor/platform system for objects to interact with.
 4. Reaction animations for unique objects
+
+UPDATED: Aug 18th 
+
+- Added user interactivity with mouse cursor on the canvas element.
+- Added player.hp to player object.
+- Added Health tracker and damage calculation from enemy objects.
+- Added console.log message of player's timed death.
+- Added hp and time survived reset after death.
+
+----------------------------------------------------------
+

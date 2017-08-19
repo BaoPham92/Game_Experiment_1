@@ -23,8 +23,10 @@ var ctx = document.getElementById("ctx").getContext("2d")
 var HEIGHT = 500;
 var WIDTH = 500;
 
+var timeStarted = Date.now(); //Time returned in MS.
+
 //Variable witholding messages to be used.
-var message = 'Bouncing';
+
 
 //Object containing properties for player.
 var player = {
@@ -33,6 +35,7 @@ spdX:30,
 y:40,
 spdY:5,
 name:'Player',
+hp: 100,
 };
 
 
@@ -72,6 +75,16 @@ Enemy = function (id,x,y,spdX,spdY){
 	enemylist[id] = enemy3;
 }
 
+document.onmousemove = function(mouse){
+	var mouseX = mouse.clientX;
+	var mouseY = mouse.clientY;
+
+	player.x = mouse.clientX;
+	player.y = mouse.clientY;
+}
+
+
+
 
 //For now, the below is expressing how we can draw something
 //within our canvas and effect how it will be placed.
@@ -79,18 +92,25 @@ ctx.font = '30px Arial';
 
 //Function template for any object we decide to call on.
 updateEntity = function (test){
+	drawEntity(test);
+	entityPosition(test);
+}
 
-ctx.fillText(test.name,test.x,test.y);
+// Draws objects with fillText.
+drawEntity = function (test){
+	ctx.fillText(test.name,test.x,test.y);
+}
+
+// Locate object location VIA X,Y axis.
+entityPosition = function (test){
 test.x += test.spdX;
 test.y += test.spdY;
 	
 	if(test.x < 0 || test.x > WIDTH){
-	console.log(message);
 	test.spdX = -test.spdX;
 	}
 
 	if(test.y < 0 || test.y > HEIGHT){
-	console.log(message);
 	test.spdY = -test.spdY;
 	}
 
@@ -108,10 +128,22 @@ update = function (){
 
 		var isColliding = testCollidingEntity(player,enemylist[key]);
 		if(isColliding){
-			console.log("Colliding!");
+
+			console.log("Player damaged!");
+			player.hp = player.hp - 5;
+			
+			if(player.hp <= 0){
+				var timeDied = Date.now() - timeStarted;
+				console.log("Player died! You died at " + timeDied + " and started from " + timeStarted);
+
+				timeStarted = Date.now();
+				player.hp = 100;
+			}
+
 		}
 	}
-	updateEntity(player);
+	drawEntity(player);
+	ctx.fillText(player.hp + " Health", 0, 30);
 }
 
 //setInterval is a timer. It will process the function we created
