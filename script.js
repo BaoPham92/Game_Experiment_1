@@ -30,12 +30,12 @@ var timeStarted = Date.now(); //Time returned in MS.
 
 //Object containing properties for player.
 var player = {
-x:50,
-spdX:30,
-y:40,
-spdY:5,
-name:'Player',
-hp: 100,
+	x: 50,
+	spdX: 30,
+	y: 40,
+	spdY: 5,
+	name: 'Player',
+	hp: 100,
 };
 
 
@@ -51,31 +51,31 @@ var enemylist = {};
 
 // get distance between player and enemy < 30 => colliding
 
-getDistanceBetweenEntity = function (entity1,entity2){ //Return Distance (number)
+getDistanceBetweenEntity = function (entity1, entity2) { //Return Distance (number)
 	var vx = entity1.x - entity2.x;
 	var vy = entity1.y - entity2.y;
-	return Math.sqrt(vx*vx+vy*vy); 
+	return Math.sqrt(vx * vx + vy * vy);
 }
 
-testCollidingEntity = function (entity1,entity2){ //Return if colliding (True/False)
-	var distance = getDistanceBetweenEntity(entity1,entity2);
+testCollidingEntity = function (entity1, entity2) { //Return if colliding (True/False)
+	var distance = getDistanceBetweenEntity(entity1, entity2);
 	return distance < 30;
 }
 
 // Movement controller for the enemy objects.
-Enemy = function (id,x,y,spdX,spdY){
+Enemy = function (id, x, y, spdX, spdY) {
 	var enemy3 = {
-		x:x,
-		spdX:spdX,
-		y:y,
-		spdY:spdY,
-		name:'E',
-		id:id,
+		x: x,
+		spdX: spdX,
+		y: y,
+		spdY: spdY,
+		name: 'E',
+		id: id,
 	};
 	enemylist[id] = enemy3;
 }
 
-document.onmousemove = function(mouse){
+document.onmousemove = function (mouse) {
 	var mouseX = mouse.clientX;
 	var mouseY = mouse.clientY;
 
@@ -91,48 +91,48 @@ document.onmousemove = function(mouse){
 ctx.font = '30px Arial';
 
 //Function template for any object we decide to call on.
-updateEntity = function (test){
+updateEntity = function (test) {
 	drawEntity(test);
 	entityPosition(test);
 }
 
 // Draws objects with fillText.
-drawEntity = function (test){
-	ctx.fillText(test.name,test.x,test.y);
+drawEntity = function (test) {
+	ctx.fillText(test.name, test.x, test.y);
 }
 
 // Locate object location VIA X,Y axis.
-entityPosition = function (test){
-test.x += test.spdX;
-test.y += test.spdY;
-	
-	if(test.x < 0 || test.x > WIDTH){
-	test.spdX = -test.spdX;
+entityPosition = function (test) {
+	test.x += test.spdX;
+	test.y += test.spdY;
+
+	if (test.x < 0 || test.x > WIDTH) {
+		test.spdX = -test.spdX;
 	}
 
-	if(test.y < 0 || test.y > HEIGHT){
-	test.spdY = -test.spdY;
+	if (test.y < 0 || test.y > HEIGHT) {
+		test.spdY = -test.spdY;
 	}
 
 }
 //clearRect is clearing the past fillText we created at every 
 //x and y for every object moving leaving no trail or duplicates.
-update = function (){
-	ctx.clearRect(0,0,WIDTH,HEIGHT);
-// The for loop will run through the enemyList for every key
-// that exist. We created the keys by giving every enemy cariable 
-// inside the list with an 'id' and assigning the variable
-// at the end to the enemyList array we created.
-	for(var key in enemylist){
+update = function () {
+	ctx.clearRect(0, 0, WIDTH, HEIGHT);
+	// The for loop will run through the enemyList for every key
+	// that exist. We created the keys by giving every enemy cariable 
+	// inside the list with an 'id' and assigning the variable
+	// at the end to the enemyList array we created.
+	for (var key in enemylist) {
 		updateEntity(enemylist[key])
 
-		var isColliding = testCollidingEntity(player,enemylist[key]);
-		if(isColliding){
+		var isColliding = testCollidingEntity(player, enemylist[key]);
+		if (isColliding) {
 
 			console.log("Player damaged!");
 			player.hp = player.hp - 5;
-			
-			if(player.hp <= 0){
+
+			if (player.hp <= 0) {
 				var timeDied = Date.now() - timeStarted;
 				console.log("Player died! You died at " + timeDied + " ms.");
 
@@ -153,21 +153,21 @@ setInterval(update, 35);
 //Object containing properties for enemy's encased in 
 //A array.
 
-Enemy('E1',150,350,10,15);
-Enemy('E2',250,315,10,-15);
-Enemy('E3',250,150,8,-8);
-Enemy('E4',100,110,10,15);
-Enemy('E5',120,115,10,-15);
-Enemy('E6',245,150,7,-8);
-Enemy('E7',235,350,10,15);
-Enemy('E8',255,350,10,-15);
-Enemy('E9',290,355,10,-8);
-Enemy('E10',300,100,5,-5);
-Enemy('E11',225,115,6,-9);
-Enemy('E12',100,465,2,-3);
-Enemy('E13',135,395,4,-11);
-Enemy('E14',90,286,3,-12);
-Enemy('E15',20,150,20,-19);
+Enemy('E1', 150, 350, 10, 15);
+Enemy('E2', 250, 315, 10, -15);
+Enemy('E3', 250, 150, 8, -8);
+Enemy('E4', 100, 110, 10, 15);
+Enemy('E5', 120, 115, 10, -15);
+Enemy('E6', 245, 150, 7, -8);
+Enemy('E7', 235, 350, 10, 15);
+Enemy('E8', 255, 350, 10, -15);
+Enemy('E9', 290, 355, 10, -8);
+Enemy('E10', 300, 100, 5, -5);
+Enemy('E11', 225, 115, 6, -9);
+Enemy('E12', 100, 465, 2, -3);
+Enemy('E13', 135, 395, 4, -11);
+Enemy('E14', 90, 286, 3, -12);
+Enemy('E15', 20, 150, 20, -19);
 
 
 
